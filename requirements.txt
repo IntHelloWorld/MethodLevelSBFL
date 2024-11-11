@@ -1,0 +1,5 @@
+llama-index
+more_itertools
+tree_sitter==0.21.3
+tree_sitter_languages
+unidiff
