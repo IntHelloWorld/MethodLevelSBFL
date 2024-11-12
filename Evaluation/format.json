@@ -1,0 +1,24 @@
+{
+    "AaltoXml-1": {
+        "buggy": "    protected boolean validPublicIdChar(int c) {\n        return\n            c == 0xA ||                     //<LF>\n            c == 0xD ||                     //<CR>\n            c == 0x20 ||                    //<SPACE>\n            (c >= '@' && c <= 'Z') ||       //@[A-Z]\n            (c >= 'a' && c <= 'z') ||\n            c == '!' ||\n            (c >= 0x23 && c <= 0x25) ||     //#$%\n            (c >= 0x27 && c <= 0x2F) ||     //'()*+,-./\n            (c >= ':' && c <= ';') ||\n            c == '=' ||\n            c == '?' ||\n            c == '_';\n    }",
+        "fix": "    protected boolean validPublicIdChar(int c) {\n        return\n            c == 0xA ||                     //<LF>\n            c == 0xD ||                     //<CR>\n            c == 0x20 ||                    //<SPACE>\n            (c >= '0' && c <= '9') ||       //[0-9]\n            (c >= '@' && c <= 'Z') ||       //@[A-Z]\n            (c >= 'a' && c <= 'z') ||\n            c == '!' ||\n            (c >= 0x23 && c <= 0x25) ||     //#$%\n            (c >= 0x27 && c <= 0x2F) ||     //'()*+,-./\n            (c >= ':' && c <= ';') ||\n            c == '=' ||\n            c == '?' ||\n            c == '_';\n    }",
+        "start": 631,
+        "end": 645,
+        "loc": "src/main/java/com/fasterxml/aalto/async/AsyncByteScanner.java",
+        "method_signature": {
+            "return_type": "boolean",
+            "method_name": "validPublicIdChar",
+            "params_string": "int c"
+        },
+        "trigger_test": {
+            "async.TestDoctypeParsing::testWithPublicId": {
+                "path": "async/TestDoctypeParsing.java",
+                "function_name": "testWithPublicId",
+                "src": "public void testWithPublicId() throws Exception\n    {\n        final String PUBLIC_ID = \"-//W3C//DTD XHTML 1.0 Strict//EN\";\n        final String SYSTEM_ID = \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\";\n        for (int spaces = 0; spaces < 3; ++spaces) {\n            String SPC = spaces(spaces);\n            _testWithIds(SPC, 1, PUBLIC_ID, SYSTEM_ID);\n            _testWithIds(SPC, 2, PUBLIC_ID, SYSTEM_ID);\n            _testWithIds(SPC, 3, PUBLIC_ID, SYSTEM_ID);\n            _testWithIds(SPC, 6, PUBLIC_ID, SYSTEM_ID);\n            _testWithIds(SPC, 900, PUBLIC_ID, SYSTEM_ID);\n        }\n    }",
+                "error_msg": "async.TestDoctypeParsing::testWithPublicId --> com.fasterxml.aalto.WFCException: Unexpected character '3' (code 51) in prolog (not valid in PUBLIC ID)",
+                "clean_error_msg": "com.fasterxml.aalto.WFCException: Unexpected character '3' (code 51) in prolog (not valid in PUBLIC ID)"
+            }
+        },
+        "buggy_code_comment": "/**\n     * Checks that a character for a PublicId\n     *\n     * @param c A character\n     * @return true if the character is valid for use in the Public ID\n     * of an XML doctype declaration\n     *\n     * @see \"http://www.w3.org/TR/xml/#NT-PubidLiteral\"\n     */"
+    }
+}

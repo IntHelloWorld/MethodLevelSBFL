@@ -7,7 +7,7 @@ work_dir=$(pwd)
 
 export GZOLTAR_AGENT_JAR=$work_dir/gzoltaragent.jar
 export GZOLTAR_CLI_JAR=$work_dir/gzoltarcli.jar
-export D4J_HOME=/root/APR/GrowingBugRepository-6.1  # Change to your own defects4j home!
+export D4J_HOME=/home/qyh/GrowingBugRepository  # Change to your own defects4j home!
 export TZ='America/Los_Angeles' # some D4J's requires this specific TimeZone
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8

@@ -1,7 +1,7 @@
 {
-    "dependencies":{
-        "D4J_exec": "/root/APR/GrowingBugRepository-6.1/framework/bin/defects4j",
-        "GB_exec": "/root/APR/GrowingBugRepository-6.1/framework/bin/defects4j"
+    "dependencies": {
+        "D4J_exec": "/home/qyh/GrowingBugRepository/framework/bin/defects4j",
+        "GB_exec": "/home/qyh/GrowingBugRepository/framework/bin/defects4j"
     },
     "hyper": {
         "sbfl_formula": "ochiai"
